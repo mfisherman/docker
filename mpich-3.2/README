@@ -1,5 +1,5 @@
 # mpich
-The Docker image `mpich` relies on Debian Buster and contains MPICH 3.3.X.
+The Docker image `mpich` relies on Alpine 3.10.3 and contains MPICH 3.2.
 It allows you to build and run your MPI programs in a docker container without the need to install MPICH or OpenMPI on your machine.
 The Dockerfile is inspired by [nlknguyen](https://hub.docker.com/r/nlknguyen/alpine-mpich/), but brings a more up to date base image and is built for a wide range of architectures.
 
@@ -7,7 +7,7 @@ The Dockerfile is inspired by [nlknguyen](https://hub.docker.com/r/nlknguyen/alp
 The following tools are installed:
 - MPICH compiler (mpicc and mpicxx) and mpirun
 - gcc and g++
-- Common developer tools (make, wget, valgrind etc.)
+- Common developer tools (make, wget, curl, etc.)
 
 ## How to use
 Run the following command:
@@ -21,11 +21,10 @@ That way you can use your favorite editor to write your code an run `mpicc`and `
 
 ## OS/ARCH
 The image is built for a majority of Linux architectures, allowing you to run the image even on all Rasperry Pi versions (e.g. as gitlab-runner).
-Note that valgrind is not available in linux/arm/v6.
 The available operating systems and architectures are:
 
  - linux/amd64
- - linux/arm/v7
  - linux/arm/v6
+ - linux/arm/v7
  - linux/arm64
- - linux/386
+

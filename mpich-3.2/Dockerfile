@@ -1,8 +1,8 @@
-FROM debian:buster-slim
+FROM alpine:3.10.3
 
-RUN apt-get update \
-      && apt-get upgrade \
-      && apt-get install -y wget gcc g++ gfortran make valgrind git # valgrind not available for arm/v6 (also known as armel)
+RUN apk update \
+      && apk upgrade \
+      && apk add --no-cache build-base libatomic gfortran git valgrind
 
 #### INSTALL MPICH ####
 # Source is available at http://www.mpich.org/static/downloads/
@@ -11,9 +11,9 @@ RUN apt-get update \
 # See installation guide of target MPICH version
 # Ex: http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2-installguide.pdf
 # These options are passed to the steps below
-ARG MPICH_VERSION="3.3.2"
+ARG MPICH_VERSION="3.2.1"
 ARG MPICH_CONFIGURE_OPTIONS
-ARG MPICH_MAKE_OPTIONS="-j4"
+ARG MPICH_MAKE_OPTIONS="-j1"
 
 # Download, build, and install MPICH
 RUN mkdir /tmp/mpich-src
@@ -39,7 +39,7 @@ RUN rm -rf /tmp/*
 #### ADD DEFAULT USER ####
 ARG USER=mpi
 ENV USER ${USER}
-RUN adduser --disabled-password ${USER}
+RUN adduser -D ${USER}
 
 ENV USER_HOME /home/${USER}
 RUN chown -R ${USER}:${USER} ${USER_HOME}
