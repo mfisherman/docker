@@ -1,6 +1,6 @@
 # Docker
 
-A selection of dockerfiles that I made over time. Images are available on [docker hub](https://hub.docker.com/u/mfisherman).
+A selection of dockerfiles. Images are available on [docker hub](https://hub.docker.com/u/mfisherman).
 
 
 ## Getting Started
@@ -17,13 +17,13 @@ Follow the [installation](https://docs.docker.com/v17.12/install/) as described 
 
 ### Creating Images
 
-Go into the according directory and create the image, e.g.:
+Clone the repository, open into the according directory and create the image, e.g.:
 ```
 cd mpich
 sudo docker build . -t mpich:3.3.2
 ```
 
-If you wish to create a docker image for a different architecture, follow the steps described in the [docker documentations](https://docs.docker.com/docker-for-mac/multi-arch/) that user buildx.
+If you wish to create a docker image for a different architecture, follow the steps described in the [docker documentations](https://docs.docker.com/docker-for-mac/multi-arch/) that use buildx.
 
 
 ## Artifacts
