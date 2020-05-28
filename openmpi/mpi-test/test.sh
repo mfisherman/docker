@@ -16,5 +16,5 @@ mpicc -o mpi_hello_world mpi_hello_world.c > /dev/null
 echo ok
 
 echo "run mpi_hello_world"
-mpirun -n 4 ./mpi_hello_world > /dev/null
+mpirun --allow-run-as-root -n 4 ./mpi_hello_world > /dev/null
 echo ok
