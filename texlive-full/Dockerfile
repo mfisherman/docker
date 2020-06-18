@@ -15,5 +15,3 @@ WORKDIR /
 RUN rm -rf /tmp/*
 
 WORKDIR /data
-
-CMD ['/bin/sh']
