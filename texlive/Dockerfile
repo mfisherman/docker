@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:20.04
 
 ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:$PATH
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
@@ -55,5 +55,3 @@ WORKDIR /
 RUN rm -rf /tmp/*
 
 WORKDIR /data
-
-CMD ['/bin/sh']

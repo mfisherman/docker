@@ -14,7 +14,7 @@ The following tools are installed:
 ## How to use
 Run the following command:
 ```
-$ docker run --rm -it -v $(pwd):/data mfisherman/texlive
+$ docker run --rm -it -v $(pwd):/data mfisherman/texlive /bin/sh
 ```
 It will automatically download the docker image to your system and run it.
 The argument `-it` allows you to run the container in interactive mode and will open a shell.
