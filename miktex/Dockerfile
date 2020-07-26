@@ -1,24 +1,78 @@
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG MIKTEX_VERSION="20.6.29"
+
+RUN apt-get update
+RUN    apt-get install -y --no-install-recommends \
+           bison \
+           ca-certificates \
+	       cmake \
+           curl \
+           dpkg-dev \
+           file \
+           flex \
+           g++ \
+           gcc \
+           gosu \
+           libbz2-dev \
+           libcairo2-dev \
+           libcurl4-openssl-dev \
+           libfribidi-dev \
+           libgd-dev \
+           libgmp-dev \
+           libgraphite2-dev \
+           libhunspell-dev \
+           libicu-dev \
+           liblog4cxx-dev \
+           libmpfr-dev \
+           libmspack-dev \
+           libpopt-dev \
+           libpotrace-dev \
+           libssl-dev \
+           liburiparser-dev \
+           libzzip-dev \
+           make \
+           qtbase5-dev \
+           qtscript5-dev \
+           qttools5-dev \
+           xsltproc \
+           xz-utils \
+           wget
+
+RUN mkdir /tmp/miktex-src
+WORKDIR /tmp/miktex-src
+
+RUN wget --no-check-certificate https://miktex.org/download/ctan/systems/win32/miktex/source/miktex-${MIKTEX_VERSION}.tar.xz \
+      && tar xvfJ miktex-${MIKTEX_VERSION}.tar.xz
+RUN cd miktex-${MIKTEX_VERSION} && mkdir build && cd build && cmake -DUSE_SYSTEM_POPPLER=FALSE \
+                                                                    -DUSE_SYSTEM_POPPLER_QT5=FALSE \
+                                                                    -DUSE_SYSTEM_HARFBUZZ=FALSE \
+                                                                    -DUSE_SYSTEM_HARFBUZZ_ICU=FALSE \
+                                                                    ..
+RUN cd miktex-${MIKTEX_VERSION}/build && make -j4
+RUN cd miktex-${MIKTEX_VERSION}/build && make package
+
+
+FROM ubuntu:20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG MIKTEX_VERSION="20.6.29"
+ARG PLATFORM="arm64"
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
-        gnupg \
-        ca-certificates
-           
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D6BC243565B2087BC3F897C9277A7293F59E4889
-RUN echo "deb http://miktex.org/download/ubuntu focal universe" | tee /etc/apt/sources.list.d/miktex.list
-
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
-        miktex \
+        ca-certificates \
         python \
         make \
         ghostscript \
         wget \
         perl \
         git
+
+COPY --from=0 /tmp/miktex-src/miktex-${MIKTEX_VERSION}/build/miktex_${MIKTEX_VERSION}-xenial1_${PLATFORM}.deb .
+RUN apt-get install -y --no-install-recommends ./miktex_${MIKTEX_VERSION}-xenial1_amd64.deb
+
 
 RUN miktexsetup finish \
     && initexmf --admin --set-config-value=[MPM]AutoInstall=1 \
@@ -42,3 +96,4 @@ WORKDIR /
 RUN rm -rf /tmp/*
 
 WORKDIR /data
+
