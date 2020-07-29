@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG MIKTEX_VERSION="20.6.29"
@@ -54,11 +54,11 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make -j4
 RUN cd miktex-${MIKTEX_VERSION}/build && make package
 
 
-FROM ubuntu:20.04
+FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG MIKTEX_VERSION="20.6.29"
-ARG PLATFORM="arm64"
+ARG PLATFORM="amd64"
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
@@ -71,7 +71,7 @@ RUN apt-get install -y --no-install-recommends \
         git
 
 COPY --from=0 /tmp/miktex-src/miktex-${MIKTEX_VERSION}/build/miktex_${MIKTEX_VERSION}-xenial1_${PLATFORM}.deb .
-RUN apt-get install -y --no-install-recommends ./miktex_${MIKTEX_VERSION}-xenial1_amd64.deb
+RUN apt-get install -y --no-install-recommends ./miktex_${MIKTEX_VERSION}-xenial1_${PLATFORM}.deb
 
 
 RUN miktexsetup finish \
