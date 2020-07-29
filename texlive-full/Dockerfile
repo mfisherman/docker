@@ -1,8 +1,8 @@
-FROM alpine
+FROM alpine:3.12.0
 
 RUN apk update
 RUN apk --no-cache add texlive-full
-RUN apk --no-cache add python make ghostscript git biber
+RUN apk --no-cache add python3 make ghostscript git biber
 
 #### TEST TEXLIVE INSTALLATION ####
 RUN mkdir /tmp/texlive-test
