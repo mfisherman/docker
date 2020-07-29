@@ -1,6 +1,7 @@
 # Docker
 
 A selection of dockerfiles. Images are available on [docker hub](https://hub.docker.com/u/mfisherman).
+Contrarily to other images, those images aim to be up-to-date and are mostly available also for different architectures such as AMD64, ARM64, ARMV7, and ARMV6.
 
 
 ## Getting Started
