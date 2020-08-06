@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="20.6.29"
+ARG MIKTEX_VERSION="20.7"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -57,7 +57,7 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make package
 FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="20.6.29"
+ARG MIKTEX_VERSION="20.7"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
