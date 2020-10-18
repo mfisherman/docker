@@ -1,5 +1,5 @@
 # gcc
-The Docker image `gcc` relies on Ubuntu 19.04 and contains a set of often used build tools for C/C++ projects.
+The Docker image `gcc` relies on Ubuntu 20.04 and contains a set of often used build tools for C/C++ projects.
 
 ## Tools
 The following tools are installed:

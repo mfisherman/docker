@@ -1,4 +1,6 @@
-FROM ubuntu:19.04
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 #### COMMON BUILD TOOLS ####
 RUN apt-get update \
