@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="20.12"
+ARG MIKTEX_VERSION="21.1"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -14,7 +14,9 @@ RUN    apt-get install -y --no-install-recommends \
            flex \
            g++ \
            gcc \
+           gettext \
            gosu \
+           libboost-all-dev \
            libbz2-dev \
            libcairo2-dev \
            libcurl4-openssl-dev \
@@ -57,7 +59,7 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make package
 FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="20.12"
+ARG MIKTEX_VERSION="21.1"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
