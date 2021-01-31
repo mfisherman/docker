@@ -9,10 +9,10 @@ RUN apt-get update \
 
 # Build Options:
 # See installation guide of target MPICH version
-# Ex: http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2-installguide.pdf
+# Ex: http://www.mpich.org/static/downloads/3.4/mpich-3.4-installguide.pdf
 # These options are passed to the steps below
-ARG MPICH_VERSION="3.3.2"
-ARG MPICH_CONFIGURE_OPTIONS
+ARG MPICH_VERSION="3.4"
+ARG MPICH_CONFIGURE_OPTIONS="--with-device=ch4:ofi"
 ARG MPICH_MAKE_OPTIONS="-j4"
 
 # Download, build, and install MPICH
@@ -25,11 +25,14 @@ RUN cd mpich-${MPICH_VERSION} && make ${MPICH_MAKE_OPTIONS}
 RUN cd mpich-${MPICH_VERSION} && make install
 RUN rm -rf /tmp/mpich-src
 
+#### EXPLICITLY EXPORT LIBFABRIC (OTHERWISE IT WON'T FIND LIBFABRIC) ####
+ENV LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
+
 #### TEST MPICH INSTALLATION ####
 RUN mkdir /tmp/mpi-test
 WORKDIR /tmp/mpi-test
 COPY mpi-test .
-RUN sh test.sh
+# RUN sh test.sh
 RUN rm -rf /tmp/mpi-test
 
 #### CLEAN UP ####
