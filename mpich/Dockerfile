@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 RUN apt-get update \
-      && apt-get upgrade \
+      && apt-get upgrade -y \
       && apt-get install -y wget gcc g++ gfortran make valgrind git # valgrind not available for arm/v6 (also known as armel)
 
 #### INSTALL MPICH ####
@@ -11,7 +11,7 @@ RUN apt-get update \
 # See installation guide of target MPICH version
 # Ex: http://www.mpich.org/static/downloads/3.4/mpich-3.4-installguide.pdf
 # These options are passed to the steps below
-ARG MPICH_VERSION="3.4"
+ARG MPICH_VERSION="3.4.1"
 ARG MPICH_CONFIGURE_OPTIONS="--with-device=ch4:ofi"
 ARG MPICH_MAKE_OPTIONS="-j4"
 
