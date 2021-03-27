@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="21.2"
+ARG MIKTEX_VERSION="21.3"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -31,11 +31,13 @@ RUN    apt-get install -y --no-install-recommends \
            libmspack-dev \
            libpopt-dev \
            libpotrace-dev \
+           libqt5qml5 \
            libssl-dev \
            liburiparser-dev \
            libzzip-dev \
            make \
            qtbase5-dev \
+           qtdeclarative5-dev \
            qtscript5-dev \
            qttools5-dev \
            xsltproc \
@@ -59,7 +61,7 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make package
 FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="21.2"
+ARG MIKTEX_VERSION="21.3"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
