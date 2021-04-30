@@ -1,10 +1,10 @@
 # openmpi
-The Docker image `openmpi` relies on Alpine 3.12.3 and contains OpenMPI 4.1.0 (latest).
-It allows you to build and run your MPI programs in a docker container without the need to install MPICH or OpenMPI on your machine.
+The Docker image `openmpi` relies on Alpine 3.13.5 and contains Open MPI 4.1.1 (latest).
+It allows you to build and run your MPI programs in a docker container without the need to install MPICH or Open MPI on your machine.
 
 ## Tools
 The following tools are installed:
-- MPICH compiler (mpicc and mpicxx) and mpirun
+- Open MPI compiler (mpicc and mpicxx) and mpirun
 - gcc and g++
 - Common developer tools (make, wget, curl, etc.)
 
