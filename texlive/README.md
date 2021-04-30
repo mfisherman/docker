@@ -1,13 +1,13 @@
 # texlive
-The Docker image texlive relies on Ubuntu 18.04 and contains a texlive installation from the texlive sources.
+The Docker image texlive relies on Ubuntu 20.10 and contains a texlive installation from the texlive sources.
 It allows you to build your LaTex sources in a docker container without the need to install texlive on your machine.
-This image is inspired by [headgeekette](https://hub.docker.com/r/headgeekette/rpi-latex/), but is up to date (2019), contains common build tools (biber, make, python, git, texliveonfly) and is smaller than other images since not all packages are installed.
+This image is inspired by [headgeekette](https://hub.docker.com/r/headgeekette/rpi-latex/), but is up to date (2021), contains common build tools (biber, make, python, git, texliveonfly) and is smaller than other images since not all packages are installed.
 Note: biber is NOT included in the ARM builds, since they are not available by the native installation.
 
 
 ## Tools
 The following tools are installed:
-- texlive 2019 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
+- texlive 2021 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
 - make, python, git
 - biber is only available in the linux/amd64 image
 
@@ -26,7 +26,6 @@ The image is built for a majority of Linux architectures, allowing you to run th
 The available operating systems and architectures are:
 
  - linux/amd64
- - linux/arm/v6
  - linux/arm/v7
  - linux/arm64
 

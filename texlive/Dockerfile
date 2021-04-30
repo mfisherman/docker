@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 
 ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:$PATH
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
