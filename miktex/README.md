@@ -1,11 +1,11 @@
 # miktex
-The Docker image miktex relies on Debian Buster (Slim) and contains a miktex installation.
+The Docker image miktex relies on Debian Bullseye (Slim) and contains a miktex installation.
 It allows you to build your LaTex sources in a docker container without the need to install miktex on your machine.
 
 
 ## Tools
 The following tools are installed:
-- miktex 21.12 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
+- miktex 22.1 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
 - make, python, git
 
 ## How to use

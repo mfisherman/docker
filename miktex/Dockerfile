@@ -1,7 +1,7 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="21.12"
+ARG MIKTEX_VERSION="22.1"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -58,10 +58,10 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make -j4
 RUN cd miktex-${MIKTEX_VERSION}/build && make package
 
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="21.12"
+ARG MIKTEX_VERSION="22.1"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
