@@ -11,7 +11,7 @@ RUN apt-get update \
 # See installation guide of target MPICH version
 # Ex: http://www.mpich.org/static/downloads/3.4/mpich-3.4-installguide.pdf
 # These options are passed to the steps below
-ARG MPICH_VERSION="3.4.2"
+ARG MPICH_VERSION="3.3"
 ARG MPICH_CONFIGURE_OPTIONS="--with-device=ch4:ofi"
 ARG MPICH_MAKE_OPTIONS="-j4"
 
@@ -32,7 +32,7 @@ ENV LD_LIBRARY_PATH="/usr/local/lib/:${LD_LIBRARY_PATH}"
 RUN mkdir /tmp/mpi-test
 WORKDIR /tmp/mpi-test
 COPY mpi-test .
-# RUN sh test.sh
+RUN sh test.sh
 RUN rm -rf /tmp/mpi-test
 
 #### CLEAN UP ####
