@@ -1,4 +1,4 @@
-FROM ubuntu:20.10
+FROM ubuntu:22.04
 
 ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:$PATH
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
@@ -10,7 +10,7 @@ ENV PATH=/usr/local/texlive/bin/aarch64-linux:$PATH
 COPY texlive-profile.txt /tmp/
 
 RUN apt-get update
-RUN apt-get install -y python make ghostscript wget perl git
+RUN apt-get install -y python3 make ghostscript wget perl git
 
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     mkdir /tmp/install-tl && \
