@@ -1,7 +1,7 @@
-FROM alpine:3.13.5
+FROM alpine:3.15.4
 
 RUN apk update
-RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community add texlive=20210325-r2
+RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community add texlive>2022
 RUN apk --no-cache add python3 make ghostscript git biber
 
 #### TEST TEXLIVE INSTALLATION ####
