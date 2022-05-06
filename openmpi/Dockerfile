@@ -1,4 +1,4 @@
-FROM alpine:3.13.5
+FROM alpine:3.14.3
 
 RUN apk update \
       && apk upgrade \
@@ -9,7 +9,7 @@ RUN apk update \
 
 # Build Options:
 # These options are passed to the steps below
-ARG OPENMPI_VERSION="4.1.1"
+ARG OPENMPI_VERSION="4.1.2"
 ARG OPENMPI_MAJOR_VERSION="v4.1"
 ARG OPENMPI_CONFIGURE_OPTIONS
 ARG OPENMPI_MAKE_OPTIONS="-j4"
