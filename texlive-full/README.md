@@ -1,12 +1,12 @@
 # texlive-full
-The Docker image `texlive-full` relies on Alpine 3.13.5 and contains a texlive-full installation.
+The Docker image `texlive-full` relies on Alpine 3.15.4 and contains a texlive-full installation.
 It allows you to build your LaTex sources in a docker container without the need to install texlive on your machine.
-Compared to other images, this texlive installation is up to date (2021) and also contains common build tools (biber, make, python, git).
+Compared to other images, this texlive installation is up to date (2022) and also contains common build tools (biber, make, python, git).
 
 
 ## Tools
 The following tools are installed:
-- texlive-full 2021 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
+- texlive-full 2022 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
 - biber, make, python, git
 
 ## How to use
