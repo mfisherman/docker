@@ -1,5 +1,5 @@
 # clang-upc
-The Docker image `clang-upc` relies on Ubuntu 20.04 and contains Clang Unified Parallel C (Clang UPC).
+The Docker image `clang-upc` relies on Ubuntu 20.04 and contains Clang Unified Parallel C (Clang UPC) version 3.9.1-2.
 It allows you to build and run your UPC programs in a docker container without the need to install Clang UPC on your machine.
 
 ## Tools

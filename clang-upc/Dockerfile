@@ -11,15 +11,15 @@ RUN apt-get update \
          python3 \
          wget
 
-ARG UPC_VERSION="3.9.1-1"
+ARG UPC_VERSION="3.9.1-2"
 ARG UPC_MAKE_OPTIONS="-j4"
 ARG UPC_CMAKE_OPTIONS="-DLLVM_TARGETS_TO_BUILD=host -DCMAKE_BUILD_TYPE=Release -DLLVM_BUILD_LLVM_DYLIB=on -DLLVM_LINK_LLVM_DYLIB=on"
 
 #### Download, build, and install Clang UPC ####
 RUN mkdir /tmp/upc-src
 WORKDIR /tmp/upc-src
-RUN wget https://github.com/Intrepid/clang-upc/releases/download/clang-upc-${UPC_VERSION}/clang-upc-all-${UPC_VERSION}.tar.gz \
-      && tar xfz clang-upc-all-${UPC_VERSION}.tar.gz
+RUN wget https://github.com/clangupc/clang-upc/releases/download/clang-upc-${UPC_VERSION}/clang-upc-${UPC_VERSION}.tar.gz \
+      && tar xfz clang-upc-${UPC_VERSION}.tar.gz
 RUN mkdir build
 RUN cd build && export CC=/usr/bin/clang && export CXX=/usr/bin/clang++ && cmake ${UPC_CMAKE_OPTIONS} ../clang-upc-${UPC_VERSION}
 RUN cd build && make ${UPC_MAKE_OPTIONS}
