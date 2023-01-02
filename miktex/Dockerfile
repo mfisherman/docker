@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="22.3"
+ARG MIKTEX_VERSION="22.10"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -47,8 +47,8 @@ RUN    apt-get install -y --no-install-recommends \
 RUN mkdir /tmp/miktex-src
 WORKDIR /tmp/miktex-src
 
-RUN wget --no-check-certificate https://miktex.org/download/ctan/systems/win32/miktex/source/miktex-${MIKTEX_VERSION}.tar.xz \
-      && tar xvfJ miktex-${MIKTEX_VERSION}.tar.xz
+RUN wget --no-check-certificate https://github.com/MiKTeX/miktex/archive/refs/tags/${MIKTEX_VERSION}.tar.gz \
+      && tar -xf ${MIKTEX_VERSION}.tar.gz
 RUN cd miktex-${MIKTEX_VERSION} && mkdir build && cd build && cmake -DUSE_SYSTEM_POPPLER=FALSE \
                                                                     -DUSE_SYSTEM_POPPLER_QT5=FALSE \
                                                                     -DUSE_SYSTEM_HARFBUZZ=FALSE \
@@ -61,7 +61,7 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make package
 FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="22.3"
+ARG MIKTEX_VERSION="22.10"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
