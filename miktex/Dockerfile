@@ -1,7 +1,7 @@
 FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="22.10"
+ARG MIKTEX_VERSION="23.4"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -61,7 +61,7 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make package
 FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="22.10"
+ARG MIKTEX_VERSION="23.4"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
