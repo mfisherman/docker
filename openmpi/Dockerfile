@@ -14,7 +14,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
 
 # Build Options:
 # These options are passed to the steps below
-ARG OPENMPI_VERSION="4.1.5"
+ARG OPENMPI_VERSION="4.1.6"
 ARG OPENMPI_MAJOR_VERSION="v4.1"
 ARG OPENMPI_CONFIGURE_OPTIONS
 ARG OPENMPI_MAKE_OPTIONS="-j4"
