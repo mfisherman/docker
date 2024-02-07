@@ -1,15 +1,20 @@
 FROM alpine:3.16.0
 
-RUN apk update \
-      && apk upgrade \
-      && apk add --no-cache build-base libatomic gfortran git valgrind perl linux-headers openssh
+ARG TARGETPLATFORM
+
+RUN apk update && apk upgrade
+RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
+      apk add --no-cache build-base libatomic gfortran git perl linux-headers openssh; \
+    else \
+      apk add --no-cache build-base libatomic gfortran git perl linux-headers openssh valgrind; \
+    fi
 
 #### INSTALL OPENMPI ####
 # Source is available at https://www.open-mpi.org/software/ompi/
 
 # Build Options:
 # These options are passed to the steps below
-ARG OPENMPI_VERSION="4.1.4"
+ARG OPENMPI_VERSION="4.1.5"
 ARG OPENMPI_MAJOR_VERSION="v4.1"
 ARG OPENMPI_CONFIGURE_OPTIONS
 ARG OPENMPI_MAKE_OPTIONS="-j4"
