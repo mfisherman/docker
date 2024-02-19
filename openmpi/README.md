@@ -1,5 +1,5 @@
 # openmpi
-The Docker image `openmpi` relies on Ubuntu 22.04 (using Alpine is not possible due to https://github.com/open-mpi/ompi/issues/12029) and contains Open MPI 5.0.0 (latest).
+The Docker image `openmpi` relies on Alpine 3.19.1 and contains Open MPI 5.0.1 (latest).
 It allows you to build and run your MPI programs in a docker container without the need to install MPICH or Open MPI on your machine.
 
 ## Tools

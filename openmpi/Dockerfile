@@ -1,12 +1,12 @@
-FROM ubuntu:22.04
+FROM alpine:3.19.1
 
 ARG TARGETPLATFORM
 
-RUN apt-get update && apt-get upgrade -y
+RUN apk update && apk upgrade
 RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
-      apt-get install -y autoconf build-essential libatomic1 wget python3 gfortran git perl; \
+      apk add --no-cache build-base libatomic gfortran git perl python3 linux-headers openssh; \
     else \
-      apt-get install -y autoconf build-essential libatomic1 wget python3 gfortran git perl valgrind; \
+      apk add --no-cache build-base libatomic gfortran git perl python3 linux-headers openssh valgrind; \
     fi
 
 #### INSTALL OPENMPI ####
@@ -14,7 +14,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
 
 # Build Options:
 # These options are passed to the steps below
-ARG OPENMPI_VERSION="5.0.0"
+ARG OPENMPI_VERSION="5.0.1"
 ARG OPENMPI_MAJOR_VERSION="v5.0"
 ARG OPENMPI_CONFIGURE_OPTIONS
 ARG OPENMPI_MAKE_OPTIONS="-j4"
@@ -28,9 +28,6 @@ RUN cd openmpi-${OPENMPI_VERSION} && ./configure ${OPENMPI_CONFIGURE_OPTIONS}
 RUN cd openmpi-${OPENMPI_VERSION} && make all ${OPENMPI_MAKE_OPTIONS}
 RUN cd openmpi-${OPENMPI_VERSION} && make install
 RUN rm -rf /tmp/openmpi-src
-
-# Run ldconfig to re-load all libraries...
-RUN ldconfig
 
 #### TEST OPENMPI INSTALLATION ####
 RUN mkdir /tmp/mpi-test
