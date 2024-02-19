@@ -1,5 +1,5 @@
 # openmpi
-The Docker image `openmpi` relies on Alpine 3.16.0 and contains Open MPI 4.1.6 (latest).
+The Docker image `openmpi` relies on Ubuntu 22.04 (using Alpine is not possible due to https://github.com/open-mpi/ompi/issues/12029) and contains Open MPI 5.0.0 (latest).
 It allows you to build and run your MPI programs in a docker container without the need to install MPICH or Open MPI on your machine.
 
 ## Tools
@@ -20,10 +20,8 @@ That way you can use your favorite editor to write your code an run `mpicc`and `
 
 ## OS/ARCH
 The image is built for a majority of Linux architectures, allowing you to run the image even on all Rasperry Pi versions (e.g. as gitlab-runner).
-The available operating systems and architectures are:
+The available operating systems and architectures are (Open MPI 5.0.x does not support 32bit, see https://github.com/open-mpi/ompi/issues/11248):
 
  - linux/amd64
- - linux/arm/v6
- - linux/arm/v7
  - linux/arm64
 

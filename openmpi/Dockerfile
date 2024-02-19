@@ -1,12 +1,12 @@
-FROM alpine:3.16.0
+FROM ubuntu:22.04
 
 ARG TARGETPLATFORM
 
-RUN apk update && apk upgrade
+RUN apt-get update && apt-get upgrade -y
 RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
-      apk add --no-cache build-base libatomic gfortran git perl linux-headers openssh; \
+      apt-get install -y autoconf build-essential libatomic1 wget python3 gfortran git perl; \
     else \
-      apk add --no-cache build-base libatomic gfortran git perl linux-headers openssh valgrind; \
+      apt-get install -y autoconf build-essential libatomic1 wget python3 gfortran git perl valgrind; \
     fi
 
 #### INSTALL OPENMPI ####
@@ -14,8 +14,8 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
 
 # Build Options:
 # These options are passed to the steps below
-ARG OPENMPI_VERSION="4.1.6"
-ARG OPENMPI_MAJOR_VERSION="v4.1"
+ARG OPENMPI_VERSION="5.0.0"
+ARG OPENMPI_MAJOR_VERSION="v5.0"
 ARG OPENMPI_CONFIGURE_OPTIONS
 ARG OPENMPI_MAKE_OPTIONS="-j4"
 
@@ -28,6 +28,9 @@ RUN cd openmpi-${OPENMPI_VERSION} && ./configure ${OPENMPI_CONFIGURE_OPTIONS}
 RUN cd openmpi-${OPENMPI_VERSION} && make all ${OPENMPI_MAKE_OPTIONS}
 RUN cd openmpi-${OPENMPI_VERSION} && make install
 RUN rm -rf /tmp/openmpi-src
+
+# Run ldconfig to re-load all libraries...
+RUN ldconfig
 
 #### TEST OPENMPI INSTALLATION ####
 RUN mkdir /tmp/mpi-test
@@ -43,7 +46,7 @@ RUN rm -rf /tmp/*
 #### ADD DEFAULT USER ####
 ARG USER=mpi
 ENV USER ${USER}
-RUN adduser -D ${USER}
+RUN adduser --disabled-password ${USER}
 
 ENV USER_HOME /home/${USER}
 RUN chown -R ${USER}:${USER} ${USER_HOME}
