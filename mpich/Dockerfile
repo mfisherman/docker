@@ -1,8 +1,13 @@
 FROM debian:bullseye-slim
 
-RUN apt-get update \
-      && apt-get upgrade -y \
-      && apt-get install -y wget gcc g++ gfortran make valgrind git python3 # valgrind not available for arm/v6 (also known as armel)
+ARG TARGETPLATFORM
+
+RUN apt-get update && apt-get upgrade -y
+RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
+      apt-get install -y wget gcc g++ gfortran make git python3; \
+    else \
+      apt-get install -y wget gcc g++ gfortran make valgrind git python3; \
+    fi
 
 #### INSTALL MPICH ####
 # Source is available at http://www.mpich.org/static/downloads/
@@ -11,7 +16,7 @@ RUN apt-get update \
 # See installation guide of target MPICH version
 # Ex: http://www.mpich.org/static/downloads/3.4/mpich-3.4-installguide.pdf
 # These options are passed to the steps below
-ARG MPICH_VERSION="4.0.2"
+ARG MPICH_VERSION="4.0.3"
 ARG MPICH_CONFIGURE_OPTIONS="FFLAGS=-fallow-argument-mismatch FCFLAGS=-fallow-argument-mismatch --with-device=ch4:ofi"
 ARG MPICH_MAKE_OPTIONS="-j4"
 
