@@ -1,7 +1,7 @@
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="23.12"
+ARG MIKTEX_VERSION="24.1"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -31,15 +31,15 @@ RUN    apt-get install -y --no-install-recommends \
            libmspack-dev \
            libpopt-dev \
            libpotrace-dev \
-           libqt5qml5 \
+           libqt6qml6 \
            libssl-dev \
            liburiparser-dev \
            libzzip-dev \
            make \
-           qtbase5-dev \
-           qtdeclarative5-dev \
-           qtscript5-dev \
-           qttools5-dev \
+           qt6-5compat-dev \
+           qt6-base-dev \
+           qt6-declarative-dev \
+           qt6-tools-dev \
            xsltproc \
            xz-utils \
            wget
@@ -58,16 +58,16 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make -j4
 RUN cd miktex-${MIKTEX_VERSION}/build && make package
 
 
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="23.12"
+ARG MIKTEX_VERSION="24.1"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
         ca-certificates \
-        python \
+        python3 \
         make \
         ghostscript \
         wget \
