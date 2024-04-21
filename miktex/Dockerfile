@@ -1,7 +1,7 @@
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="24.1"
+ARG MIKTEX_VERSION="24.3"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -27,6 +27,10 @@ RUN    apt-get install -y --no-install-recommends \
            libhunspell-dev \
            libicu-dev \
            liblog4cxx-dev \
+# libmpfi-dev version 1.5.4 is only available on testing for now. 
+# See https://www.mail-archive.com/debian-bugs-dist@lists.debian.org/msg1962203.html
+           libmpfi-dev \
+           libmpfi-dev-common \
            libmpfr-dev \
            libmspack-dev \
            libpopt-dev \
@@ -58,10 +62,10 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make -j4
 RUN cd miktex-${MIKTEX_VERSION}/build && make package
 
 
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="24.1"
+ARG MIKTEX_VERSION="24.3"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
