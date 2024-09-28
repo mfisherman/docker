@@ -22,7 +22,7 @@ Further, the command mounts the directory, from where you run the command above,
 That way you can use your favorite editor to write your LaTex and compile it in the container. Further packages can be installed using `tlmgr`.
 
 ## OS/ARCH
-The image is built for a majority of Linux architectures, allowing you to run the image even on all Rasperry Pi versions (e.g. as gitlab-runner).
+The image is built for a majority of Linux architectures, allowing you to run the image even on all Raspberry Pi versions (e.g. as gitlab-runner).
 The available operating systems and architectures are:
 
  - linux/amd64

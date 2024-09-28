@@ -19,7 +19,7 @@ Further, the command mounts the directory, from where you run the command above,
 That way you can use your favorite editor to write your code an run `mpicc`and `mpiccxx`in the container.
 
 ## OS/ARCH
-The image is built for a majority of Linux architectures, allowing you to run the image even on all Rasperry Pi versions (e.g. as gitlab-runner).
+The image is built for a majority of Linux architectures, allowing you to run the image even on all Raspberry Pi versions (e.g. as gitlab-runner).
 The available operating systems and architectures are (Open MPI 5.0.x does not support 32bit architectures, see https://github.com/open-mpi/ompi/issues/11248 - use MPI 4.x for 32bit architectures such as ARMv7/ARMv6/x86):
 
  - linux/amd64
