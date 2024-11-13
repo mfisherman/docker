@@ -1,5 +1,5 @@
 # mpich
-The Docker image `mpich` relies on Debian Bookworm (Slim) and contains MPICH 4.2.2.
+The Docker image `mpich` relies on Debian Bookworm (Slim) and contains MPICH 4.2.3.
 It allows you to build and run your MPI programs in a docker container without the need to install MPICH or OpenMPI on your machine.
 The Dockerfile is inspired by [nlknguyen](https://hub.docker.com/r/nlknguyen/alpine-mpich/), but brings a more up to date base image and is built for a wide range of architectures.
 
