@@ -1,4 +1,4 @@
-FROM alpine:3.19.1
+FROM alpine:3.21.3
 
 ARG TARGETPLATFORM
 
@@ -14,7 +14,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
 
 # Build Options:
 # These options are passed to the steps below
-ARG OPENMPI_VERSION="5.0.6"
+ARG OPENMPI_VERSION="5.0.7"
 ARG OPENMPI_MAJOR_VERSION="v5.0"
 ARG OPENMPI_CONFIGURE_OPTIONS
 ARG OPENMPI_MAKE_OPTIONS="-j4"
