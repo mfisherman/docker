@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:$PATH
 ENV PATH=/usr/local/texlive/bin/x86_64-linux:$PATH
@@ -27,7 +27,8 @@ RUN tlmgr install \
       collection-latexrecommended \
       collection-latexextra \
       collection-mathscience \
-      baskervald \
+      baskervaldadf \
+      baskervaldx \
       biber \
       biblatex \
       cochineal \

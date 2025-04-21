@@ -1,13 +1,13 @@
 # texlive
-The Docker image texlive relies on Ubuntu 22.04 and contains a texlive installation from the texlive sources.
+The Docker image texlive relies on Ubuntu 24.04 and contains a texlive installation from the texlive sources.
 It allows you to build your LaTex sources in a docker container without the need to install texlive on your machine.
-This image is inspired by [headgeekette](https://hub.docker.com/r/headgeekette/rpi-latex/), but is up to date (2024), contains common build tools (biber, make, python, git, texliveonfly) and is smaller than other images since not all packages are installed.
+This image is inspired by [headgeekette](https://hub.docker.com/r/headgeekette/rpi-latex/), but is up to date (2025), contains common build tools (biber, make, python, git, texliveonfly) and is smaller than other images since not all packages are installed.
 Note: biber is NOT included in the ARM builds, since they are not available by the native installation.
 
 
 ## Tools
 The following tools are installed:
-- texlive 2024 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
+- texlive 2025 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
 - make, python, git
 - biber is only available in the linux/amd64 image
 
