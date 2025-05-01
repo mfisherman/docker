@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 # This Dockerfile is similar to the release tools and Dockerfile in 
 # https://github.com/OpenCilk/infrastructure/tree/release
 
-ARG TAG="opencilk/v1.0"
+ARG TAG="opencilk/v1.1"
 ARG OPENCILK_SOURCE="/opencilk/opencilk-project"
 ARG CHEETAH_SOURCE="${OPENCILK_SOURCE}/cheetah"
 ARG CILKTOOLS_SOURCE="${OPENCILK_SOURCE}/cilktools"
@@ -38,23 +38,8 @@ RUN mkdir -p ${CILKTOOLS_SOURCE} && \
       rm cilktools.tar.gz
 
 # Fix compilation errors
-# /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp:909:9: note: 'free' is defined in header '<cstdlib>'; did you forget to '#include <cstdlib>'?
-RUN sed -i '42a #include <cstdlib>' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '43a extern "C" void* calloc(size_t, size_t);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '44a extern "C" void* malloc(size_t);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '45a extern "C" long int strtol(const char* nptr, char** endptr, int base);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '46a extern "C" double strtod(const char* nptr, char** endptr);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '47a extern "C" long long int strtoll(const char* nptr, char** endptr, int base);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '48a extern "C" unsigned long int strtoul(const char* nptr, char** endptr, int base);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '49a extern "C" long long unsigned int strtoull(const char* nptr, char** endptr, int base);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-RUN sed -i '50a extern "C" void free(void* ptr);' /opencilk/opencilk-project/compiler-rt/lib/dfsan/dfsan_custom.cpp
-# /opencilk/opencilk-project/llvm/utils/benchmark/src/benchmark_register.h:17:30: error: 'numeric_limits' is not a member of 'std'
-RUN sed -i '4a #include <limits>' /opencilk/opencilk-project/llvm/utils/benchmark/src/benchmark_register.h
-# /opencilk/opencilk-project/llvm/include/llvm/Support/Signals.h:117:24: error: 'uintptr_t' was not declared in this scope
+# /opencilk/opencilk-project/llvm/include/llvm/Support/Signals.h:119:24: error: 'uintptr_t' was not declared in this scope
 RUN sed -i '17a #include <cstdint>' /opencilk/opencilk-project/llvm/include/llvm/Support/Signals.h
-# /opencilk/opencilk-project/llvm/lib/Support/Unix/Signals.inc:348:44: error: 'void llvm::sys::CleanupOnSignal(uintptr_t)' should have been declared inside 'llvm::sys'
-RUN sed -i 's/\bvoid sys::CleanupOnSignal(/void llvm::sys::CleanupOnSignal(/' /opencilk/opencilk-project/llvm/lib/Support/Unix/Signals.inc
-RUN cat /opencilk/opencilk-project/llvm/lib/Support/Unix/Signals.inc
 
 # Configure CMake
 RUN mkdir -p ${BUILD_DIR}
