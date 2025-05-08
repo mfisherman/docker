@@ -1,11 +1,11 @@
 # opencilk
-The Docker image `opencilk` relies on Ubuntu 24.04 and contains OpenCilk 1.1.
+The Docker image `opencilk` relies on Ubuntu 24.04 and contains OpenCilk 2.0.
 It allows you to build and run your Cilk programs in a docker container without the need to install OpenCilk or Cilk Plus on your machine.
 
 ## Tools
 The following tools are installed:
 - OpenCilk compiler (clang that supports the `-fopencilk` flag)
-- Common developer tools (git, make, gcc, g++)
+- Common developer tools (git, cmake)
 
 ## How to use
 Run the following command:

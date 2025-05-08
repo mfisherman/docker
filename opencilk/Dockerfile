@@ -3,13 +3,12 @@ FROM ubuntu:24.04
 # This Dockerfile is similar to the release tools and Dockerfile in 
 # https://github.com/OpenCilk/infrastructure/tree/release
 
-ARG TAG="opencilk/v1.1"
+ARG TAG="opencilk/v2.0"
 ARG OPENCILK_SOURCE="/opencilk/opencilk-project"
 ARG CHEETAH_SOURCE="${OPENCILK_SOURCE}/cheetah"
 ARG CILKTOOLS_SOURCE="${OPENCILK_SOURCE}/cilktools"
 ARG BUILD_DIR="/opencilk/build"
 ARG INSTALL_DIR="/opt/opencilk"
-ARG FOO="foo"
 
 # Install required packages for buiding
 RUN apt-get update
@@ -37,10 +36,6 @@ RUN mkdir -p ${CILKTOOLS_SOURCE} && \
       tar -xf cilktools.tar.gz -C ${CILKTOOLS_SOURCE} --strip-components 1 && \
       rm cilktools.tar.gz
 
-# Fix compilation errors
-# /opencilk/opencilk-project/llvm/include/llvm/Support/Signals.h:119:24: error: 'uintptr_t' was not declared in this scope
-RUN sed -i '17a #include <cstdint>' /opencilk/opencilk-project/llvm/include/llvm/Support/Signals.h
-
 # Configure CMake
 RUN mkdir -p ${BUILD_DIR}
 WORKDIR ${BUILD_DIR}
@@ -64,17 +59,14 @@ FROM ubuntu:24.04
 
 ARG INSTALL_DIR="/opt/opencilk"
 
-# Install packages, note that OpenCilk already comes with LLVM
+# Install packages
 RUN apt-get update && apt-get install -y \
       # dependencies
       libz3-4 \
       libc6-dev \
-      # tools for development
+      # tools for development (no gcc/g++, OpenCilk already comes with clang/LLVM)
       cmake \
-      gcc \
-      g++ \
-      git \
-      cmake
+      git
 
 # Copy OpenCilk installation
 COPY --from=0 ${INSTALL_DIR} ${INSTALL_DIR}
