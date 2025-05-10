@@ -1,7 +1,7 @@
 FROM debian:trixie-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="25.3"
+ARG MIKTEX_VERSION="25.4"
 
 RUN apt-get update
 RUN    apt-get install -y --no-install-recommends \
@@ -65,7 +65,7 @@ RUN cd miktex-${MIKTEX_VERSION}/build && make package
 FROM debian:trixie-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG MIKTEX_VERSION="25.3"
+ARG MIKTEX_VERSION="25.4"
 ARG PLATFORM="amd64"
 
 RUN apt-get update
