@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 # This Dockerfile is similar to the release tools and Dockerfile in 
 # https://github.com/OpenCilk/infrastructure/tree/release
 
-ARG TAG="opencilk/v2.0.1"
+ARG TAG="opencilk/v2.1"
 ARG OPENCILK_SOURCE="/opencilk/opencilk-project"
 ARG CHEETAH_SOURCE="${OPENCILK_SOURCE}/cheetah"
 ARG CILKTOOLS_SOURCE="${OPENCILK_SOURCE}/cilktools"
