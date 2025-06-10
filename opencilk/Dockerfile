@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 # This Dockerfile is similar to the release tools and Dockerfile in 
 # https://github.com/OpenCilk/infrastructure/tree/release
 
-ARG TAG="opencilk/v2.1"
+ARG TAG="opencilk/v3.0"
 ARG OPENCILK_SOURCE="/opencilk/opencilk-project"
 ARG CHEETAH_SOURCE="${OPENCILK_SOURCE}/cheetah"
 ARG CILKTOOLS_SOURCE="${OPENCILK_SOURCE}/cilktools"
@@ -50,7 +50,8 @@ RUN cmake -DLLVM_ENABLE_PROJECTS="clang;compiler-rt" \
 
 # Build OpenCilk, install it into /opt/opencilk and remove the build folder
 # Build generates ca. 4GB of data, install ca. 2.5GB
-RUN cmake --build . -j 4 && \
+# Use n-1 cores
+RUN cmake --build . -j 3 && \
       cmake --build . --target install && \
       rm -rf ${BUILD_DIR}
 
