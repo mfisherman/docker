@@ -6,7 +6,7 @@ FROM ubuntu:22.04
 ARG SOURCE_DIR="/oneTBB"
 ARG BUILD_DIR="/oneTBB/build"
 ARG INSTALL_DIR="/opt/onetbb"
-ARG TAG="v2021.1.1"
+ARG TAG="v2021.2.0"
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
