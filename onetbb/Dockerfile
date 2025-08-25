@@ -6,7 +6,7 @@ FROM ubuntu:22.04
 ARG SOURCE_DIR="/oneTBB"
 ARG BUILD_DIR="/oneTBB/build"
 ARG INSTALL_DIR="/opt/onetbb"
-ARG TAG="v2021.3.0"
+ARG TAG="v2021.4.0"
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
@@ -26,9 +26,6 @@ RUN mkdir -p ${SOURCE_DIR} && \
       tar -xf oneTBB.tar.gz -C ${SOURCE_DIR} --strip-components 1 && \
       rm oneTBB.tar.gz
 
-# Fix for:
-# /oneTBB/src/tbbmalloc/frontend.cpp:829:49: error: 'getSmallObjectIndex' was not declared in this scope
-RUN sed -i 's/#if __TBB_x86_32 || __aarch32__/#if __TBB_x86_32 || __aarch32__ || __arm__/' ${SOURCE_DIR}/src/tbbmalloc/frontend.cpp
 
 # Configure CMake
 RUN mkdir -p ${BUILD_DIR}
