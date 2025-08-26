@@ -1,10 +1,10 @@
 # onetbb
-The Docker image `onetbb` relies on Ubuntu 22.04 and contains oneAPI Threading Building Blocks (oneTBB) 2021.6.0.
+The Docker image `onetbb` relies on Ubuntu 25.04 and contains oneAPI Threading Building Blocks (oneTBB) 2021.7.0.
 It allows you to build and run your oneTBB programs in a docker container without the need to install oneTBB on your machine.
 
 ## Tools
 The following tools are installed:
-- gcc/g++ 9 with oneTBB (supports the `-ltbb` flag)
+- gcc/g++ with oneTBB (supports the `-ltbb` flag)
 - Common developer tools (git, cmake)
 
 ## How to use
