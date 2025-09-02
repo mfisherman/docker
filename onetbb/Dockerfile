@@ -6,7 +6,7 @@ FROM ubuntu:25.04
 ARG SOURCE_DIR="/oneTBB"
 ARG BUILD_DIR="/oneTBB/build"
 ARG INSTALL_DIR="/opt/onetbb"
-ARG TAG="v2021.7.0"
+ARG TAG="v2021.8.0"
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
