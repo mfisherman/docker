@@ -6,7 +6,7 @@ FROM ubuntu:25.04
 ARG SOURCE_DIR="/oneTBB"
 ARG BUILD_DIR="/oneTBB/build"
 ARG INSTALL_DIR="/opt/onetbb"
-ARG TAG="v2022.1.0"
+ARG TAG="v2022.2.0"
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
@@ -23,9 +23,11 @@ RUN mkdir -p ${SOURCE_DIR} && \
       rm oneTBB.tar.gz
 
 
-# Configure CMake
+# Configure CMake.
 RUN mkdir -p ${BUILD_DIR}
 WORKDIR ${BUILD_DIR}
+# Control-Flow Enforcement Technology (CET) does not exist on ARMv7.
+RUN sed -i 's/if (NOT CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64" AND NOT EMSCRIPTEN)/if (NOT CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64" AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "arm" AND NOT EMSCRIPTEN)/' ${SOURCE_DIR}/cmake/compilers/GNU.cmake
 RUN cmake -DCMAKE_BUILD_TYPE=Release \
           -DTBB_TEST=OFF \
           -DBUILD_SHARED_LIBS=ON \
