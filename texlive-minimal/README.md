@@ -1,12 +1,12 @@
 # texlive-minimal
-The Docker image `texlive-minimal` relies on Alpine 3.19.1 and contains a texlive installation.
+The Docker image `texlive-minimal` relies on Alpine 3.22.2 and contains a texlive installation.
 It allows you to build your LaTex sources in a docker container without the need to install texlive on your machine.
-Compared to other images, this texlive installation is up to date (2024), contains common build tools (biber, make, python, git), but is smaller than other images since it relies on Alpine.
+Compared to other images, this texlive installation is up to date (2025.2), contains common build tools (biber, make, python, git), but is smaller than other images since it relies on Alpine.
 
 
 ## Tools
 The following tools are installed:
-- texlive 2024 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
+- texlive 2025.2 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
 - biber, make, python, git
 
 ## How to use
