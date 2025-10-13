@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 ARG TARGETPLATFORM
 
@@ -16,8 +16,11 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
 # See installation guide of target MPICH version
 # Ex: http://www.mpich.org/static/downloads/3.4/mpich-3.4-installguide.pdf
 # These options are passed to the steps below
-ARG MPICH_VERSION="4.3.1"
+ARG MPICH_VERSION="4.3.2"
 ARG MPICH_CONFIGURE_OPTIONS="FFLAGS=-fallow-argument-mismatch FCFLAGS=-fallow-argument-mismatch --with-device=ch4:ofi"
+# Use TCP/IP for 32bit due to pointer incompatibility:
+# /include/ofi_iov.h:204:51: note: expected 'size_t *' {aka 'unsigned int *'} but argument is of type 'long unsigned int *
+ARG MPICH_CONFIGURE_OPTIONS_32BIT="FFLAGS=-fallow-argument-mismatch FCFLAGS=-fallow-argument-mismatch --with-device=ch3:sock"
 ARG MPICH_MAKE_OPTIONS="-j4"
 
 # Download, build, and install MPICH
@@ -25,7 +28,12 @@ RUN mkdir /tmp/mpich-src
 WORKDIR /tmp/mpich-src
 RUN wget http://www.mpich.org/static/downloads/${MPICH_VERSION}/mpich-${MPICH_VERSION}.tar.gz \
       && tar xfz mpich-${MPICH_VERSION}.tar.gz
-RUN cd mpich-${MPICH_VERSION} && ./configure ${MPICH_CONFIGURE_OPTIONS}
+RUN cd mpich-${MPICH_VERSION} && \
+    if [ "$TARGETPLATFORM" = "linux/386" ] || [ "$TARGETPLATFORM" = "linux/arm/v6" ] || [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then \
+      ./configure ${MPICH_CONFIGURE_OPTIONS_32BIT}; \
+    else \
+      ./configure ${MPICH_CONFIGURE_OPTIONS}; \
+    fi
 RUN cd mpich-${MPICH_VERSION} && make ${MPICH_MAKE_OPTIONS}
 RUN cd mpich-${MPICH_VERSION} && make install
 RUN rm -rf /tmp/mpich-src
