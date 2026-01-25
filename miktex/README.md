@@ -5,7 +5,7 @@ It allows you to build your LaTex sources in a docker container without the need
 
 ## Tools
 The following tools are installed:
-- miktex 25.4 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
+- miktex 25.12 (pdflatex, latex, bibtex, dvips, ps2pdf14 etc.)
 - make, python, git
 
 ## How to use
