@@ -16,7 +16,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v6" ]; then \
 # See installation guide of target MPICH version
 # Ex: http://www.mpich.org/static/downloads/3.4/mpich-3.4-installguide.pdf
 # These options are passed to the steps below
-ARG MPICH_VERSION="4.3.2"
+ARG MPICH_VERSION="5.0.0"
 ARG MPICH_CONFIGURE_OPTIONS="FFLAGS=-fallow-argument-mismatch FCFLAGS=-fallow-argument-mismatch --with-device=ch4:ofi"
 # Use TCP/IP for 32bit due to pointer incompatibility:
 # /include/ofi_iov.h:204:51: note: expected 'size_t *' {aka 'unsigned int *'} but argument is of type 'long unsigned int *
